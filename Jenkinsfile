@@ -10,7 +10,9 @@ pipeline {
         }
         stage ('Production Stage') {
             when {
-                expression {BRANCH_NAME ==~ /(production|staging)}
+                expression {
+                    BRANCH_NAME ==~ /(production|staging)/
+                    }
             }
             steps {
                 echo "Application deploying in production"
