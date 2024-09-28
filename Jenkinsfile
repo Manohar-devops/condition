@@ -1,3 +1,4 @@
+// default env defined by jenkins for MBP
 pipeline {
     agent {
         label 'java-agent-slave'
@@ -9,6 +10,11 @@ pipeline {
             }
         }
         stage ('Production Stage') {
+            when {
+                expression {
+                    BRANCH_NAME ==~ /(production|staging)
+                }
+            }
             steps {
                 echo "Application deploying in production"
             }          
