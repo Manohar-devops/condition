@@ -16,6 +16,9 @@ pipeline {
                 //environment based condition
                 environment name: 'DEPLOY_TO', value: 'Prod'
             }
+            steps{
+                echo "Deploying Application to Prod"
+            }
         }
     }
 }
