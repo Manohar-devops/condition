@@ -1,22 +1,29 @@
-pipeline {
+//anyOf
+ pipeline {
     agent {
         label 'java-agent-slave'
     }
+    environment {
+        DEPLOY_TO = 'abcd'
+    }
     stages {
-        stage ('Build Stage') {
+        stage ('Build stage') {
             steps {
-                echo "Application building in build stage"
+                echo "Buildig app"
             }
         }
-        stage ('Production Stage') {
+        stage ('anyOf stage') {
             when {
-                expression {
-                    BRANCH_NAME ==~ /(production|staging)/
+                anyOf {
+                    environment name: 'DEPLOY_TO', value: 'Prod'
+                    expression {
+                        BRANCH_NAME ==~ /(production|staging)/
                     }
+                }
             }
             steps {
-                echo "Application deploying in production"
-            }          
+                echo "App deployed in anyOf stage"
+            }
         }
     }
-}
+ }
