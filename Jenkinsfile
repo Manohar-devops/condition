@@ -1,28 +1,44 @@
- //allOf
+// tag based deploymnet
+
  pipeline {
-    agent {
-        label 'java-agent-slave'
-    }
-    environment {
-        DEPLOY_TO = 'prod'
-    }
+    agent any
     stages {
-        stage ('Build stage') {
+        stage ('Build') {
             steps {
-                echo "Buildig app"
+                echo "Building app"
             }
         }
-        stage ('anyOf stage') {
+        stage ('Sonar') {
+            steps {
+                echo "code quakity"
+            }
+        }
+        stage ('DockerImage') {
+            steps {
+                echo "creating docker image"
+            }
+        }
+        stage ('DockerPush') {
             when {
-                allOf {
-                    environment name: 'DEPLOY_TO', value: 'prod'
-                    expression {
-                        BRANCH_NAME ==~ /(production|staging)/
-                    }
-                }
+                branch = 'release/*'
             }
             steps {
-                echo "App deployed in anyOf stage"
+                echo "pushing docker image to docker hub"
+            }
+        }
+        stage ('stage') {
+            steps {
+                echo "Deploying app in stage"
+            }
+        }
+        stage ('production') {
+            when {
+                // Application should only deploy to prod if the app is going through tag
+                //v1.x.x ==> v1.2.3 is the tag version
+                tag pattern: "v\\d{1,2}\\.\\d{1,2}\\.\\d{1,2}\\", comparator: "REGEXP"
+            }
+            steps {
+                echo "Deploying app in production"
             }
         }
     }
