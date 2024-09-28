@@ -1,19 +1,17 @@
 pipeline {
     agent {
-        label 'node-agent-slave'
-    }
-    environment {
-        DEPLOY_TO = 'Production' // Just an environment variable
+        label 'java-agent-slave'
     }
     stages {
-        stage ('whenstage') {
-            when {
-                //environment based condition
-                environment name: 'DEPLOY_TO', value: 'Prod'
+        stage ('Build Stage') {
+            steps {
+                echo "Application building in build stage"
             }
-            steps{
-                echo "Deploying Application to whenstage"
-            }
+        }
+        stage ('Production Stage') {
+            steps {
+                echo "Application deploying in production"
+            }          
         }
     }
 }
