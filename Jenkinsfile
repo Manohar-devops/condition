@@ -1,10 +1,10 @@
-//anyOf
+ //allOf
  pipeline {
     agent {
         label 'java-agent-slave'
     }
     environment {
-        DEPLOY_TO = 'abcd'
+        DEPLOY_TO = 'prod'
     }
     stages {
         stage ('Build stage') {
@@ -14,8 +14,8 @@
         }
         stage ('anyOf stage') {
             when {
-                anyOf {
-                    environment name: 'DEPLOY_TO', value: 'Prod'
+                allOf {
+                    environment name: 'DEPLOY_TO', value: 'prod'
                     expression {
                         BRANCH_NAME ==~ /(production|staging)/
                     }
