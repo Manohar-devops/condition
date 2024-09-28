@@ -1,4 +1,4 @@
- //allOf
+//allOf
  pipeline {
     agent {
         label 'java-agent-slave'
