@@ -3,7 +3,7 @@ pipeline {
         label 'node-agent-slave'
     }
     environment {
-        DEPLOY_TO = 'Prod' // Just an environment variable
+        DEPLOY_TO = 'Production' // Just an environment variable
     }
     stages {
         stage ('whenstage') {
