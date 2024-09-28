@@ -6,18 +6,13 @@ pipeline {
         DEPLOY_TO = 'Prod' // Just an environment variable
     }
     stages {
-        stage ('Build Stage') {
-            steps {
-                echo "Building the Application"
-            }
-        }
-        stage ('ProdStage') {
+        stage ('whenstage') {
             when {
                 //environment based condition
                 environment name: 'DEPLOY_TO', value: 'Prod'
             }
             steps{
-                echo "Deploying Application to Prod"
+                echo "Deploying Application to whenstage"
             }
         }
     }
