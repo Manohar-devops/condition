@@ -12,7 +12,7 @@
                 echo "Buildig app"
             }
         }
-        stage (anyOf stage) {
+        stage ('anyOf stage') {
             when {
                 anyOf {
                     environment name: 'DEPLOY_TO', value = 'Prod'
