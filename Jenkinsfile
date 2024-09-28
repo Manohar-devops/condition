@@ -35,7 +35,7 @@
             when {
                 // Application should only deploy to prod if the app is going through tag
                 //v1.x.x ==> v1.2.3 is the tag version
-                tag pattern: "v\\d{1,2}\\.\\d{1,2}\\.\\d{1,2}\\", comparator: "REGEXP"
+                tag pattern: "v\\d{1,2}\\.\\d{1,2}\\.\\d{1,2}", comparator: "REGEXP"
             }
             steps {
                 echo "Deploying app in production"
