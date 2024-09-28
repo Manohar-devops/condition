@@ -15,7 +15,7 @@
         stage ('anyOf stage') {
             when {
                 anyOf {
-                    environment name: 'DEPLOY_TO', value = 'Prod'
+                    environment name: 'DEPLOY_TO', value: 'Prod'
                     expression {
                         BRANCH_NAME ==~ /(production|staging)/
                     }
