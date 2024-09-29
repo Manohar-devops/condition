@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'CHANGE_TICKET', defaultValue: 'CH12345', description: 'Enter you change ticket')
-        booleanparam(name: 'IS SRE APPROVED ?', defaultValue: 'true', description: 'Take the approval from SRE')
+        booleanParam(name: 'IS SRE APPROVED ?', defaultValue: 'true', description: 'Take the approval from SRE')
         choice(choices: 'Regular\nHotfix', description: 'What release is this', name: 'RELEASE')
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'A secret password')
     }
